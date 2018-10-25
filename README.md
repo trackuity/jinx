@@ -14,3 +14,10 @@ $ env/bin/python setup.py develop
 
 $ env/bin/jinx --help
 ```
+
+On a Mac, you might want to use **brew** to install **berkeley-db** and then point to it 
+using the BERKELEYDB_DIR environment variable while executing setup.py, e.g.:
+
+```sh
+BERKELEYDB_DIR=/usr/local/opt/berkeley-db@4/ env/bin/python setup.py develop
+```
