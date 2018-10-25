@@ -13,8 +13,8 @@ app.config.DATA_DIR = '.'
 databases = {}
 
 
-@app.route('/<name>/<keys>')
-@app.route('/<name>/<prefix>/<keys>')
+@app.route('/<name>/<keys>', methods=['GET'])
+@app.route('/<name>/<prefix>/<keys>', methods=['GET'])
 async def lookup(request, name, keys, prefix=None):
     database = databases.get(name)
     if database is None:
@@ -23,6 +23,16 @@ async def lookup(request, name, keys, prefix=None):
     if prefix is not None:
         keys = ('{0}:{1}'.format(prefix, key) for key in keys)
     return response.json(database.multi_get(keys))
+
+
+@app.route('/', methods=['PATCH'])
+@app.route('/<name>', methods=['PATCH'])
+async def reload(request, name=None):
+    if name is None:
+        databases.clear()
+    elif name in databases:
+        del databases[name]
+    return response.text('', status=204)  # no content
 
 
 if __name__ == '__main__':
