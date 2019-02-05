@@ -35,5 +35,10 @@ async def reload(request, name=None):
     return response.text('', status=204)  # no content
 
 
+@app.route('/_ping', methods=['GET'])
+async def ping(request):
+    return response.text('pong')
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000)
