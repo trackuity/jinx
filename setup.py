@@ -12,6 +12,7 @@ setup(
         'bsddb3==6.2.6',
         'Click==7.0',
         'Sanic==0.8.3',
+        'ujson==1.35',
     ],
     entry_points='''
         [console_scripts]
