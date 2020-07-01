@@ -4,25 +4,50 @@ Fast and simple indexing for [JSON Lines](http://jsonlines.org/) files, complete
 a built-in [Sanic](https://sanic.readthedocs.io) web server for speedy lookups over HTTP. 
 [Berkeley DBs](https://pypi.org/project/bsddb3/) are used under the hood for the indexes.
 
-For trying **jinx** out on an Ubuntu machine, you can get started like so:
+## Installation
+
+### Prerequisites
+
+You'll want to make sure you have the Berkeley DB library installed first.
+
+On an Ubuntu machine, you can use apt to install it like so:
 
 ```sh
 $ apt-get install libdb5.3-dev
+```
 
+On a Mac, you can use **brew** to install **berkeley-db**. You might also need to point
+to it afterwards using the BERKELEYDB_DIR environment variable, e.g.:
+
+```sh
+$ export BERKELEYDB_DIR=/usr/local/opt/berkeley-db@4/
+```
+
+### For users
+
+```sh
+$ virtualenv --python=python3 env
+$ env/bin/pip install git+git://github.com/trackuity/jinx.git#egg=jinx
+
+$ env/bin/jinx --help
+```
+
+Note that this installs the latest version from the master branch on Github. You can also
+install a specific version by adding a version tag to the URI, e.g. `@v0.1` to install
+version 0.1: `git+git://github.com/trackuity/jinx.git@v0.1#egg=jinx`
+
+### For developers
+
+```sh
 $ virtualenv --python=python3 env
 $ env/bin/python setup.py develop
 
 $ env/bin/jinx --help
 ```
 
-On a Mac, you might want to use **brew** to install **berkeley-db** and then point to it 
-using the BERKELEYDB_DIR environment variable while executing setup.py, e.g.:
+## Usage
 
-```sh
-BERKELEYDB_DIR=/usr/local/opt/berkeley-db@4/ env/bin/python setup.py develop
-```
-
-Once you got this sorted, you're ready to jinx some files. Here's a simple example:
+Once you got the installation sorted, you're ready to jinx some files. Here's a simple example:
 
 ```sh
 $ cat players.jsonl
