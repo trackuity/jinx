@@ -8,8 +8,8 @@ app.config.DATA_DIR = '.'
 databases = {}
 
 
-@app.route('/<name>/<keys:path>', methods=['GET'])
-@app.route('/<name>/<prefix:[^:]+>/<keys:path>', methods=['GET'])
+@app.route('/<name>/<keys:str>', methods=['GET'], unquote=True)
+@app.route('/<name>/<prefix:[^:]+>/<keys:str>', methods=['GET'], unquote=True)
 async def lookup(request, name, keys, prefix=None):
     database = databases.get(name)
     if database is None:
@@ -24,7 +24,7 @@ async def lookup(request, name, keys, prefix=None):
 
 
 @app.route('/', methods=['PATCH'])
-@app.route('/<name>', methods=['PATCH'])
+@app.route('/<name>', methods=['PATCH'], unquote=True)
 async def reload(request, name=None):
     if name is None:
         databases.clear()
