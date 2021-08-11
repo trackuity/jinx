@@ -1,8 +1,3 @@
-import bsddb3
-import struct
-import json
-import sys
-
 from sanic import Sanic, response
 from .io import Database
 
