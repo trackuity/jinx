@@ -17,7 +17,10 @@ async def lookup(request, name, keys, prefix=None):
     keys = keys.split(',')
     if prefix is not None:
         keys = ('{0}:{1}'.format(prefix, key) for key in keys)
-    return response.json(database.multi_get(keys))
+    return response.raw(
+        '[{}]'.format(','.join(database.multi_get(keys))),
+        content_type='application/json'
+    )
 
 
 @app.route('/', methods=['PATCH'])

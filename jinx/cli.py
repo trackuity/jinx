@@ -1,5 +1,4 @@
 import click
-import json
 
 from .io import Indexer, Database
 from .server import app
@@ -29,7 +28,7 @@ def lookup(prefix, file, key):
         key = ('{0}:{1}'.format(prefix, k) for k in key)
     database = Database(file)
     for value in database.multi_get(key):
-        click.echo(json.dumps(value))
+        click.echo(value)
     database.close()
 
 

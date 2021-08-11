@@ -1,5 +1,5 @@
 import os
-import ujson as json
+import json
 import bsddb3
 import struct
 
@@ -51,7 +51,7 @@ class Database:
             if packed is not None:
                 offset = struct.unpack('L', packed)[0]
                 self._file.seek(offset)
-                yield json.loads(self._file.readline())
+                yield self._file.readline()[:-1]  # don't include newline
 
     def close(self):
         self._file.close()
