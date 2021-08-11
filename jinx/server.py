@@ -14,7 +14,7 @@ databases = {}
 
 
 @app.route('/<name>/<keys:path>', methods=['GET'])
-@app.route('/<name>/<prefix:[^:]>/<keys:path>', methods=['GET'])
+@app.route('/<name>/<prefix:[^:]+>/<keys:path>', methods=['GET'])
 async def lookup(request, name, keys, prefix=None):
     database = databases.get(name)
     if database is None:
