@@ -77,7 +77,7 @@ $ env/bin/jinx lookup players.jsonl -p belgium hazard
 {"name": "hazard", "country": "belgium", "goals": 53, "matches": 86}
 ```
 
-And there's nifty built-in web server for doing lookups over HTTP as well:
+And there's a nifty built-in web server for doing lookups over HTTP as well:
 
 ```
 $ env/bin/jinx serve -h 127.0.0.1 -p 8000 -d .
