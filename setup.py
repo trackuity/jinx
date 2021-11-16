@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jinx',
-    version='0.4',
+    version='0.5',
     license='Apache Software License (ASF)',
     description='Fast and simple indexing for JSON Lines files',
     url='https://github.com/trackuity/jinx',
