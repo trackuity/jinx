@@ -11,21 +11,21 @@ def cli():
 
 @click.command()
 @click.option('--key', '-k', help='Key field.')
-@click.option('--prefix', '-p', default=None, help='Prefix field.')
+@click.option('--prefix', '-p', multiple=True, help='Prefix field.')
 @click.argument('file')
 def index(key, prefix, file):
-    indexer = Indexer(file, key_field=key, prefix_field=prefix)
+    indexer = Indexer(file, key_field=key, prefix_fields=prefix)
     indexer.index()
     indexer.close()
 
 
 @click.command()
-@click.option('--prefix', '-p', default=None, help='Prefix to prepend to keys.')
+@click.option('--prefix', '-p', multiple=True, help='Prefix to prepend to keys.')
 @click.argument('file')
 @click.argument('key', nargs=-1)
 def lookup(prefix, file, key):
     if prefix is not None:
-        key = ('{0}:{1}'.format(prefix, k) for k in key)
+        key = ('{0}:{1}'.format(",".join(prefix), k) for k in key)
     database = Database(file)
     for value in database.multi_get(key):
         click.echo(value)

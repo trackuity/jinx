@@ -6,9 +6,9 @@ import struct
 
 class Indexer:
 
-    def __init__(self, name, key_field, prefix_field=None):
+    def __init__(self, name, key_field, prefix_fields=None):
         self._key_field = key_field
-        self._prefix_field = prefix_field
+        self._prefix_fields = prefix_fields
         self._file = open(name, 'r')
         self._db = bsddb3.hashopen(name + '.jinx', 'c')
         self._offset = 0
@@ -17,8 +17,11 @@ class Indexer:
         for line in self._file:
             data = json.loads(line)
             key = data[self._key_field]
-            if self._prefix_field is not None:
-                key = '{0}:{1}'.format(data[self._prefix_field], key)
+            if self._prefix_fields is not None:
+                prefix_key = ",".join(
+                    data[prefix_field] for prefix_field in self._prefix_fields
+                )
+                key = '{0}:{1}'.format(prefix_key, key)
             self._db[bytes(key, 'utf-8')] = struct.pack('L', self._offset)
             self._offset += len(line)
 
