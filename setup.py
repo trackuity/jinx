@@ -11,7 +11,7 @@ setup(
     install_requires=[
         'bsddb3==6.2.6',
         'Click==7.0',
-        'Sanic==21.6.2',
+        'Sanic==21.12.2',
     ],
     entry_points='''
         [console_scripts]
