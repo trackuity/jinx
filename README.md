@@ -16,18 +16,18 @@ On an Ubuntu machine, you can use apt to install it like so:
 $ apt-get install libdb5.3-dev
 ```
 
-On a Mac, you can use **brew** to install **berkeley-db**. You might also need to point
+On a Mac, you can use **brew** to install **berkeley-db@4**. You might also need to point
 to it afterwards using the BERKELEYDB_DIR environment variable, e.g.:
 
 ```sh
-$ export BERKELEYDB_DIR=/usr/local/opt/berkeley-db@4/
+$ export BERKELEYDB_DIR=/opt/homebrew/opt/berkeley-db@4/
 ```
 
 ### For users
 
 ```sh
-$ virtualenv --python=python3 env
-$ env/bin/pip install git+git://github.com/trackuity/jinx.git#egg=jinx
+$ python3 -m venv env
+$ env/bin/pip install git+https://github.com/trackuity/jinx.git#egg=jinx
 
 $ env/bin/jinx --help
 ```
@@ -39,7 +39,7 @@ version 0.1: `git+git://github.com/trackuity/jinx.git@v0.1#egg=jinx`
 ### For developers
 
 ```sh
-$ virtualenv --python=python3 env
+$ python3 -m venv env
 $ env/bin/python setup.py develop
 
 $ env/bin/jinx --help
